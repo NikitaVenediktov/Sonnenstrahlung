@@ -1,0 +1,29 @@
+# ComComparison requirements
+# Usage: pip install -r requirements.txt
+
+# Base ----------------------------------------
+numpy>=1.23.4
+pandas>=1.5.0
+scikit-learn>=1.1.2
+notebook>=6.5.1
+pytz>=2022.6
+seaborn>=0.12.1
+
+# Code style
+black>=22.3.0
+flake8>=4.0.1
+isort>=5.10.1
+pytest>=7.1.2
+flake8-bugbear>=22.3.23
+flake8-comprehensions>=3.8.0
+flake8-docstrings>=1.6.0
+flake8-eradicate>=1.2.0
+flake8-isort>=4.1.1
+pep8-naming>=0.12.1
+flake8-string-format>=0.3.0
+flake8-bandit>=3.0.0
+flake8-builtins>=1.5.3
+flake8-black>=0.3.2
+flake8-expression-complexity>=0.0.11
+flake8-annotations-complexity>=0.0.7
+flake8-requirements>=1.5.3
