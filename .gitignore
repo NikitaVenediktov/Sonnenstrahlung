@@ -132,3 +132,4 @@ poetry.lock
 .vscode/
 data/
 setup.cfg
+.DS_Store
