@@ -12,6 +12,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import r2_score
 import matplotlib.dates as md
 from typing import List
+import joblib
 
 
 def humanize_time(
@@ -206,6 +207,11 @@ def main():
     x_train_best = x_train[best_features]
     x_test_best = x_test[best_features]
     regressor.fit(x_train_best, y_train)
+    print(x_test_best.head())
+
+    # Save new regressor to file
+    save_fname = r"data/model.sav"
+    joblib.dump(regressor, open(save_fname, "wb"))
 
     accuracies = cross_val_score(
         estimator=regressor, X=x_train_best, y=y_train, cv=10, scoring="r2"
