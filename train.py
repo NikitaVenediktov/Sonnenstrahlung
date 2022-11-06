@@ -120,6 +120,7 @@ def main():
         tzone=args.time_zone,
     )
     dataset.drop(["Data", "Time", "TimeSunRise", "TimeSunSet"], inplace=True, axis=1)
+    print(dataset.head())
 
     # Plot diagrams
     if args.plot:
@@ -158,10 +159,12 @@ def main():
     ]
     y = dataset["Radiation"]
 
+    # Split dataset
     x_train, x_test, y_train, y_test = train_test_split(
         x, y, test_size=0.2, random_state=0
     )
 
+    # Checking random forest regression
     regressor = RandomForestRegressor(n_estimators=100)
     regressor.fit(x_train, y_train)
     feature_importances = regressor.feature_importances_
@@ -170,11 +173,13 @@ def main():
     removed_columns = pd.DataFrame()
     models = []
     r2s_opt = []
+    delta_r2 = []
 
-    for _ in range(0, 5):
+    for i in range(5):
         least_important = np.argmin(feature_importances)
-        removed_columns = removed_columns.append(
-            x_train_opt.pop(x_train_opt.columns[least_important])
+        removed_columns = pd.concat(
+            [removed_columns, x_train_opt.pop(x_train_opt.columns[least_important])],
+            ignore_index=True,
         )
         regressor.fit(x_train_opt, y_train)
         feature_importances = regressor.feature_importances_
@@ -182,13 +187,24 @@ def main():
             estimator=regressor, X=x_train_opt, y=y_train, cv=5, scoring="r2"
         )
         r2s_opt = np.append(r2s_opt, accuracies.mean())
-        models = np.append(models, ", ".join(list(x_train_opt)))
+        delta_r2 = np.append(
+            delta_r2,
+            abs(accuracies.mean() - r2s_opt[i - 1] if i > 0 else 1.0),
+        )
+        models = np.append(models, " ".join(list(x_train_opt)))
 
-    feature_selection = pd.DataFrame({"Features": models, "r2 Score": r2s_opt})
-    feature_selection.head()
+    feature_selection = pd.DataFrame(
+        {"Features": models, "r2 Score": r2s_opt, "delta": delta_r2}
+    )
+    print(feature_selection.head())
+    best_features = feature_selection.iloc[feature_selection["delta"].idxmin()][
+        "Features"
+    ].split()
+    print("Best features are:", best_features)
 
-    x_train_best = x_train[["Temperature", "DayOfYear", "TimeOfDay(s)"]]
-    x_test_best = x_test[["Temperature", "DayOfYear", "TimeOfDay(s)"]]
+    # Train new regressor on best features
+    x_train_best = x_train[best_features]
+    x_test_best = x_test[best_features]
     regressor.fit(x_train_best, y_train)
 
     accuracies = cross_val_score(
@@ -201,9 +217,7 @@ def main():
     r_squared = r2_score(y_test, y_pred)
     print(f"r2 = {r_squared}")
 
-    dataset["y_pred"] = regressor.predict(
-        dataset[["Temperature", "DayOfYear", "TimeOfDay(s)"]]
-    )
+    dataset["y_pred"] = regressor.predict(dataset[best_features])
 
     if args.plot:
         fig = plt.figure(figsize=(30, 6))
