@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "ComComparison"
+name = "Sonnenstrahlung"
 version = "0.0.1"
-description = "Companies names comparison project"
+description = "Solar radiation prediction project"
 authors = ["VIN Team"]
 license = "MIT"
 
