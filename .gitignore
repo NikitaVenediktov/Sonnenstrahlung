@@ -129,7 +129,7 @@ dmypy.json
 .pyre/
 
 poetry.lock
-.vscode/
 data/
+.vscode/
 setup.cfg
 .DS_Store
