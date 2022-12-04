@@ -1,18 +1,19 @@
 """VIN Team project 3."""
 
 import argparse
-import numpy as np
+from typing import List
+
+import joblib
+import matplotlib.dates as md
 import matplotlib.pyplot as plt
-import seaborn as sns
+import numpy as np
 import pandas as pd
-from pytz import timezone
 import pytz
-from sklearn.model_selection import train_test_split, cross_val_score
+import seaborn as sns
+from pytz import timezone
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import r2_score
-import matplotlib.dates as md
-from typing import List
-import joblib
+from sklearn.model_selection import cross_val_score, train_test_split
 
 
 def humanize_time(
@@ -50,8 +51,8 @@ def plot_diags(
     palette: str = "YlOrRd_r",
 ) -> plt.Figure:
     """Plots diagrams."""
-    assert set(params) <= set(dataset.columns), "Params must be in dataset columns"
-    assert set(periods) <= set(dataset.columns), "Periods must be in dataset columns"
+    set(params) <= set(dataset.columns), "Params must be in dataset columns"
+    set(periods) <= set(dataset.columns), "Periods must be in dataset columns"
 
     grouped = {p: dataset.groupby(p).mean().reset_index() for p in periods}
     f, axes = plt.subplots(

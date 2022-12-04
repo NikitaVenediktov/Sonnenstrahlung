@@ -29,6 +29,68 @@
 
 Солнечная энергия, в настоящее время является одним из наиболее популярных альтернативных источников энергии. Некоторые районы, поселения,частные территории бывают полностью зависимы от этого вида энергии и логично,что нужно рационально накапливать и использовать ее. В этом может помочь предсказание интенсивности солнечного излучения (солнечной радиации). Знание того,когда условия наиболее благоприятны для падающего солнечного излучения, имеет решающее значение для принятия решения о том, когда и где разместить солнечные панели и батареи и после наиболее эффективно использовать полученную энергию.
 
+
+## &#128204;Дз3 по инженерным практикам в ML
+
+- [x] Отформатировать код с помощью isort и black/autopep8/yapf.
+- [x] Выбрать набор плагинов для flake8 (от 5 штук).
+```py
+-   repo: https://github.com/PyCQA/flake8
+    rev: 6.0.0
+    hooks:
+    -   id: flake8
+        args: [--max-line-length=131]
+        additional_dependencies: [
+            'flake8-bugbear>=19.8.0',
+            'flake8-isort>=2.7.0',
+            'flake8-bandit>=3.0.0',
+            'flake8-builtins>=1.5.3',
+            'flake8-annotations-complexity>=0.0.7',
+            'flake8-requirements>=1.5.3',
+        ]
+```
+
+- [x] Записать выбранные формтеры, линтеры и плагины в readme.md. (1 балла) \
+  Пишу их сюда) trailing-whitespace, end-of-file-fixer, check-yaml, check-added-large-files, black и flake8 с допами
+- [x] Зафиксировать настройки форматера и линтера в pyproject.toml или setup.cfg (1 балла)
+- [x] Настроить и добавить pre-commit в проект. (1 балла)
+- [x] Провести анализ кода с помощью flake8 и плагинов и зафиксировать проблемы в файле linting.md (1 балла)
+- [] Провести рефакторинг выявленных проблем. (3 балла)
+
+Стандартная установка и запуск pre-commit:
+
+```py
+poetry add pre-commit
+pre-commit sample-config > .pre-commit-config.yaml
+pre-commit install
+pre-commit run --all-files
+```
+
+если ошибки
+
+```py
+pre-commit clean
+pre-commit autoupdate
+```
+
+Пример работы
+
+```sh
+(.venv) (base) nikivene@DESKTOP-78NOBF0:~/ITMO_Projects/Sonnenstrahlung$ pre-commit run --all-files
+trim trailing whitespace.................................................Passed
+fix end of files.........................................................Passed
+check yaml...........................................(no files to check)Skipped
+check for added large files..............................................Passed
+file contents sorter.................................(no files to check)Skipped
+black....................................................................Passed
+flake8...................................................................Passed
+```
+
+```
+poetry export -f requirements.txt --output requirements.txt
+isort train.py
+```
+
 ## &#128204;Features
 
 ### &#128642;Под капотом  (Мы предоставляем сценарий):
@@ -115,7 +177,7 @@ poetry install
 </p>
 </details>
 
-## Цитирование 
+## Цитирование
 
 Если вы используете GennaDIY в своих исследованиях, рассмотрите возможность цитирования
 ```python
