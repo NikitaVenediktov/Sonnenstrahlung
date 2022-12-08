@@ -21,6 +21,8 @@ fastapi = "^0.88.0"
 joblib = "^1.2.0"
 PyWavelets = "^1.4.1"
 mypy = "^0.991"
+dvc = "^2.36.0"
+dvc-gdrive = "^2.19.1"
 
 [tool.poetry.dev-dependencies]
 black = "^22.3.0"

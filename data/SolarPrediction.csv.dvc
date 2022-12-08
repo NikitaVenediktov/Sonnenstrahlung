@@ -1,0 +1,5 @@
+outs:
+- md5: a596558059b6f7cc565685736ced66fe
+  size: 2960323
+  isexec: true
+  path: SolarPrediction.csv

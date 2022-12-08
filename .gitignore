@@ -129,7 +129,8 @@ dmypy.json
 .pyre/
 
 poetry.lock
-data/
+# data/
 .vscode/
 setup.cfg
 .DS_Store
+data/SolarPrediction.csv
