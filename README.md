@@ -29,8 +29,30 @@
 
 Солнечная энергия, в настоящее время является одним из наиболее популярных альтернативных источников энергии. Некоторые районы, поселения,частные территории бывают полностью зависимы от этого вида энергии и логично,что нужно рационально накапливать и использовать ее. В этом может помочь предсказание интенсивности солнечного излучения (солнечной радиации). Знание того,когда условия наиболее благоприятны для падающего солнечного излучения, имеет решающее значение для принятия решения о том, когда и где разместить солнечные панели и батареи и после наиболее эффективно использовать полученную энергию.
 
+## &#128204; Дз4 по инженерным практикам в ML
 
-## &#128204;Дз3 по инженерным практикам в ML
+Все команды, которые использовал. Выбрал Гугл Драйв
+
+```sh
+poetry add dvc
+dvc remote add -d -f  myremote gdrive://17GipegOof8pgO1gtpu9BVZRaIXUtg-2n/dvcstore
+dvc init
+git status
+git commit -m "Initialize DVC"
+dvc add data/SolarPrediction.csv
+git add data/SolarPrediction.csv data/.gitignore
+git commit -m "Add raw data"
+git add data/SolarPrediction.csv data/.gitignore
+git commit -m "Add raw data"
+poetry add dvc_gdrive
+dvc remote add -d myremote gdrive://17GipegOof8pgO1gtpu9BVZRaIXUtg-2n/dvcstore # создайте папку еще
+dvc push
+git add .dvc/config
+git commit -m "Configure remote storage"
+dvc push
+
+```
+## &#128204; Дз3 по инженерным практикам в ML
 
 - [x] Отформатировать код с помощью isort и black/autopep8/yapf.
 - [x] Выбрать набор плагинов для flake8 (от 5 штук).
