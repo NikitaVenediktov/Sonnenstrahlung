@@ -3,10 +3,11 @@
 from datetime import datetime
 
 import pandas as pd
-import regressor as regr
 from fastapi import FastAPI
 from joblib import load
 from pydantic import BaseModel, Field
+
+import regressor as regr
 
 
 def humanize_time(time: datetime) -> dict:

@@ -473,3 +473,6 @@ Unable to find qualified name for module: app.py
 Unable to find qualified name for module: train.py
 [1mtrain.py[m[36m:[m54[36m:[m1[36m:[m [1m[31mS101[m Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
 [1mtrain.py[m[36m:[m55[36m:[m1[36m:[m [1m[31mS101[m Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+service/app.py:6:1: I001 isort found an import in the wrong position
+service/app.py:10:1: I003 isort expected 1 blank line in imports, found 0
+service/app.py:10:1: I900 'service' not listed as a requirement
