@@ -132,5 +132,6 @@ poetry.lock
 # data/
 .vscode/
 setup.cfg
-.DS_Store
 data/SolarPrediction.csv
+*.sav
+.DS_Store

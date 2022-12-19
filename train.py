@@ -212,7 +212,9 @@ def main():
 
     # Save new regressor to file
     save_fname = r"data/model.sav"
+    print(f"Saving model to {save_fname}...")
     joblib.dump(regressor, open(save_fname, "wb"))
+    print("Done.")
 
     accuracies = cross_val_score(
         estimator=regressor, X=x_train_best, y=y_train, cv=10, scoring="r2"
